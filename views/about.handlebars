@@ -1,0 +1,13 @@
+<a href="/register"> Register </a>
+<a href="/login"> Login </a>
+<h1>database</h1>
+<ul>
+    {{#each data}}
+        {{#with this}}
+            <li>Nickname : {{nickname}}</li>
+            <li>Password : {{password}}</li>
+            <li>Email : {{email}}</li>
+            <hr>
+        {{/with}}
+    {{/each}}
+</ul>

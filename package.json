@@ -1,0 +1,31 @@
+{
+  "name": "login-auth",
+  "version": "1.0.0",
+  "description": "login authentication test, for future implementation to musicality",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vagus-art/login-auth.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vagus-art/login-auth/issues"
+  },
+  "homepage": "https://github.com/Vagus-art/login-auth#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-flash": "0.0.2",
+    "express-handlebars": "^3.1.0",
+    "express-session": "^1.17.0",
+    "mongoose": "^5.8.4",
+    "nodemon": "^2.0.2"
+  }
+}
