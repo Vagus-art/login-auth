@@ -7,6 +7,7 @@ const userModel = require('./models/users.js');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 
+//merge?
 //middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('./public'));
