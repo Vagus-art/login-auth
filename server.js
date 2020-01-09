@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 
 //middleware
-app.use('/register',bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //handlebars
 app.engine('handlebars', exphbs());
@@ -49,7 +49,23 @@ app.post('/register',async (req,res)=>{
     catch {
         res.send('there has been an error encrypting your password');
     }
-    
+
+});
+app.post('/login', async (req,res)=>{
+    try{
+      const [nickname,password] = [req.body.nickname,req.body.password];
+      const user = await userModel.findOne({nickname:nickname});
+      const match = await bcrypt.compare(password,user.password);
+      if(match){
+        res.send(`welcome ${nickname}!`);
+      }
+      else{
+        res.redirect('/login');
+      }
+    }
+    catch(error){
+      console.log(error);
+    }
 })
 
 app.listen(port,()=>console.log(`Server running on port ${port}`));
