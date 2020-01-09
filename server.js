@@ -7,14 +7,19 @@ const userModel = require('./models/users.js');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 
-
 //middleware
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(express.static('./public'));
 //handlebars
-app.engine('handlebars', exphbs());
+app.engine('handlebars', exphbs({
+ defaultLayout: 'main',
+ extname: '.handlebars',
+ layoutsDir: './views/layouts'
+}));
 app.set('view engine', 'handlebars');
 
+app.locals.css = 'main.css'; //express local variables, works with handlebars
+app.locals.omg = 'omg this is awesome';
 
 //routing
 //get
