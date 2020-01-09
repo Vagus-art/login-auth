@@ -7,7 +7,6 @@ const userModel = require('./models/users.js');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 
-//testing git on new pc
 
 //middleware
 app.use(bodyParser.urlencoded({ extended: true }));
