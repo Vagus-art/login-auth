@@ -6,11 +6,13 @@ const database = require('./database.js');
 const userModel = require('./models/users.js');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
+const session = require('express-session');
 
-//merge?
 //middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('./public'));
+app.use(session({secret: 'ssshhhhh'}));
+
 //handlebars
 app.engine('handlebars', exphbs({
  defaultLayout: 'main',
@@ -20,12 +22,19 @@ app.engine('handlebars', exphbs({
 app.set('view engine', 'handlebars');
 
 app.locals.css = 'main.css'; //express local variables, works with handlebars
-app.locals.omg = 'omg this is awesome';
 
 //routing
+var sess;
+
 //get
 app.get('/',(req,res)=>{
-    res.render('home');
+    sess = req.session;
+    if (sess.nickname){
+        res.render('home',{nickname:sess.nickname});
+    }
+    else {
+        res.render('login');
+    }
 })
 
 app.get('/about', async (req,res)=>{
@@ -60,11 +69,13 @@ app.post('/register',async (req,res)=>{
 });
 app.post('/login', async (req,res)=>{
     try{
+      sess = req.session;
       const [nickname,password] = [req.body.nickname,req.body.password];
       const user = await userModel.findOne({nickname:nickname});
       const match = await bcrypt.compare(password,user.password);
       if(match){
-        res.send(`welcome ${nickname}!`);
+        sess.nickname = nickname;
+        res.redirect('/');
       }
       else{
         res.redirect('/login');
