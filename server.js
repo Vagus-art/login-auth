@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('./public'));
 app.use(session({
     genid: ()=>uuid(),
-  secret: 'ssshhhhh'}));
+  secret: 'mysecret'}));
 
 //handlebars
 app.engine('handlebars', exphbs({
@@ -69,22 +69,32 @@ app.get('/login',(req,res)=>{
 })
 
 app.get('/logout',(req,res)=>{
-    sess = req.session;
-    req.session.destroy((err)=>console.log(err));
-    res.redirect('/login');
+    try{
+        sess = req.session;
+        req.session.destroy();
+        res.redirect('/login');
+    }
+    catch(err){
+        console.log(err,'logout');
+    }
 })
 
 //post
 app.post('/register',async (req,res)=>{
-    try {
-        const pass = await bcrypt.hash(req.body.password, 10);
-        const user = new userModel({nickname:req.body.nickname,password:pass,email:req.body.email});
-        user.save().then(response=>res.redirect('/about'));
+    let check = await userModel.findOne({nickname:req.body.nickname});
+    if(!check){
+        try {
+            const pass = await bcrypt.hash(req.body.password, 10);
+            const user = new userModel({nickname:req.body.nickname,password:pass,email:req.body.email});
+            user.save().then(response=>res.redirect('/login'));
+        }
+        catch {
+            res.send('there has been an error encrypting your password');
+        }
     }
-    catch {
-        res.send('there has been an error encrypting your password');
+    else{
+        res.render('register',{message:'Username taken. Try another one.'});
     }
-
 });
 app.post('/login', async (req,res)=>{
     try{
@@ -106,7 +116,7 @@ app.post('/login', async (req,res)=>{
         }
     }
     catch(error){
-      console.log(error);
+      console.log(error,'login');
     }
 })
 app.post('/changepass', async (req,res)=>{
@@ -131,7 +141,7 @@ app.post('/changepass', async (req,res)=>{
             }
         }
         catch(error){
-          console.log(error);
+          console.log(error,'changepass');
         }
     })
 
