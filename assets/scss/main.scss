@@ -98,6 +98,8 @@ body {
   margin-inline:$margin;
 }
 .screen{
+  min-width: $form_width_small;
+  min-height: $form_height;
   display:flex;
   flex-direction: column;
   background-color: white;

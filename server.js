@@ -7,11 +7,14 @@ const userModel = require('./models/users.js');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const session = require('express-session');
+const uuid = require('uuid');
 
 //middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('./public'));
-app.use(session({secret: 'ssshhhhh'}));
+app.use(session({
+    genid: ()=>uuid(),
+  secret: 'ssshhhhh'}));
 
 //handlebars
 app.engine('handlebars', exphbs({
@@ -48,11 +51,27 @@ app.get('/api',async (req,res)=>{
 })
 
 app.get('/register',(req,res)=>{
-    res.render('register');
+    if (req.session.nickname){
+        res.redirect('/');
+    }
+    else{
+        res.render('register');
+    }
 })
 
 app.get('/login',(req,res)=>{
-    res.render('login');
+    if (req.session.nickname){
+        res.redirect('/');
+    }
+    else{
+        res.render('login');
+    }
+})
+
+app.get('/logout',(req,res)=>{
+    sess = req.session;
+    req.session.destroy((err)=>console.log(err));
+    res.redirect('/login');
 })
 
 //post

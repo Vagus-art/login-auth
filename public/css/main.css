@@ -76,6 +76,8 @@ body {
   margin-inline: 5px; }
 
 .screen {
+  min-width: 300px;
+  min-height: 400px;
   display: flex;
   flex-direction: column;
   background-color: white;
