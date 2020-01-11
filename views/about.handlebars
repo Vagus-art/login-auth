@@ -1,13 +1,25 @@
-<a href="/register"> Register </a>
-<a href="/login"> Login </a>
-<h1>database</h1>
-<ul>
-    {{#each data}}
-        {{#with this}}
-            <li>Nickname : {{nickname}}</li>
-            <li>Password : {{password}}</li>
-            <li>Email : {{email}}</li>
-            <hr>
-        {{/with}}
-    {{/each}}
-</ul>
+<div class="screen">
+    <div class="separator">
+        <h2>Database</h2>
+    </div>
+    <ul class="dbitems">
+        {{#each data}}
+            {{#with this}}
+                <li>
+                    <div class="datacard">
+                        <ul>
+                            <li>Nickname : {{nickname}}</li>
+                            <li>Password : {{password}}</li>
+                            <li>Email : {{email}}</li>
+                        </ul>
+                    </div>
+                </li>
+            {{/with}}
+        {{/each}}
+    </ul>
+    <div class="loginlinks">
+        <a href="/register"> Register </a>
+        <a href="/login"> Login </a>
+        <a href="/">Home</a>
+    </div>
+</div>

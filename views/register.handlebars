@@ -1,11 +1,24 @@
-<h1>Register</h1>
-<form method="POST" enctype="application/x-www-form-urlencoded">
-    <label for="Nickname">Nickname</label>
-    <input type="text" name="nickname" placeholder="Nickname..." required>
-    <label for="Email">Email</label>
-    <input type="email" name="email" placeholder="Email..." required>
-    <label for="Password">Password</label>
-    <input type="password" name="password" placeholder="Password..." required>
-    <input type="submit" value="Submit">
-</form>
-<a href="/login"> Log in </a>
+<div class="screenform">
+    <form method="POST" enctype="application/x-www-form-urlencoded" class="form">
+        <div class="separator">
+            <h2>Register</h2>
+        </div>
+        <div class="label-wrap">
+            <input class="input"  type="text" name="nickname" placeholder="Nickname..." required>
+        </div>
+        <div class="label-wrap">
+            <input class="input"  type="email" name="email" placeholder="Email..." required>
+        </div>
+        <div class="label-wrap">
+            <input class="input"  type="password" name="password" placeholder="Password..." required>
+        </div>
+        <input type="submit" value="Register" class="form-btn">
+        <div class="loginlinks">
+            <a href="/login"> Log in </a>
+        </div>
+    </form>
+    <div class="loginlinks">
+        <a href="/about">Database</a>
+        <a href="/">Home</a>
+    </div>
+</div>

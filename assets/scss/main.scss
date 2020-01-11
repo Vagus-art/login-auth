@@ -1,7 +1,141 @@
-$font-stack:    Helvetica, sans-serif;
-$primary-color: blue;
+$font-stack:    Roboto, sans-serif;
+$primary-color: black;
+$form_width: 400px;
+$form_width_small:300px;
+$form_height: 400px;
+$radius:2px;
+$button-radius:8px;
+$shadow:0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+$padding: 15px;
+$margin:5px;
+$form_content_width: $form_width - $padding;
+$form_content_width_small: $form_width_small - $padding;
+$primary:#1565c0;
+$p_light:#5e92f3;
+$p_dark:#003c8f;
 
+
+//color https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=1565C0
+*{
+  margin:0;
+  padding:0;
+}
 body {
   font: 100% $font-stack;
   color: $primary-color;
+}
+.view {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width:inherit;
+  height:inherit;
+  min-height: 100vh;
+  background-color: gray;
+}
+.screenform{
+  display:block;
+  float:center;
+}
+.form{
+  text-align: left;
+  width:$form_width;
+  height:$form_height;
+  border-radius: $radius;
+  box-shadow: $shadow;
+  padding: $padding;
+  display:flex;
+  flex-direction: column;
+  background-color: white;
+  position: relative;
+  align-items: center;
+}
+
+.input {
+  font-size: larger;
+  &:focus{
+    outline: 0;
+    box-shadow: 0;
+  }
+  padding-block:0.3em;
+  border:none;
+  border-bottom: 2px solid gray;
+  margin-block:$margin;
+  width:$form_content_width;
+}
+.form-btn{
+  margin:$margin+$padding;
+  font-size: large;
+  font-weight: lighter;
+  border:none;
+  background-color: $primary;
+  padding:$padding;
+  border-radius: $button-radius;
+  color:white;
+  width:$form_content_width;
+    &:hover{
+      background-color: $p_light;
+      cursor: pointer;
+  }
+    &:focus{
+      background-color: $p_dark;
+    }
+}
+.separator{
+  height: $form_height/4;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+.loginlinks{
+  text-align: right;
+  position: absolute;
+  bottom:$padding;
+  right:$padding;
+  display:flex;
+}
+.loginlinks a{
+  margin-inline:$margin;
+}
+.screen{
+  display:flex;
+  flex-direction: column;
+  background-color: white;
+  padding:$padding;
+  border-radius: $radius;
+  box-shadow: $shadow;
+  position: relative;
+  padding-bottom: $padding*2+$margin;
+}
+ul{
+  list-style: none;
+}
+li{
+  overflow: hidden;
+}
+.dbitems{
+  display:flex;
+  flex-direction: column;
+}
+.datacard{
+  border-radius: $radius;
+  box-shadow: $shadow;
+  padding:$padding/2;
+  margin-block:$margin;
+}
+.datacard ul{
+  display:flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+@media screen and (max-width:450px){
+  .form, .screen{
+    max-width:$form_width_small;
+  }
+  .form-btn, .input {
+    max-width:$form_content_width_small;
+  }
+  li{
+    overflow: scroll;
+  }
 }
