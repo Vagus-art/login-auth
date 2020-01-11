@@ -19,6 +19,7 @@ $p_dark:#003c8f;
 *{
   margin:0;
   padding:0;
+  box-sizing: border-box;
 }
 body {
   font: 100% $font-stack;
@@ -39,8 +40,6 @@ body {
 }
 .form{
   text-align: left;
-  width:$form_width;
-  height:$form_height;
   border-radius: $radius;
   box-shadow: $shadow;
   padding: $padding;
@@ -52,6 +51,7 @@ body {
 }
 
 .input {
+  width:100%;
   font-size: larger;
   &:focus{
     outline: 0;
@@ -60,11 +60,15 @@ body {
   padding-block:0.3em;
   border:none;
   border-bottom: 2px solid gray;
-  margin-block:$margin;
-  width:$form_content_width;
+  margin-block:$margin*2;
+  
+}
+.label-wrap{
+  width:inherit;
 }
 .form-btn{
   margin:$margin+$padding;
+  margin-bottom: $margin*2+$padding;
   font-size: large;
   font-weight: lighter;
   border:none;
@@ -72,7 +76,8 @@ body {
   padding:$padding;
   border-radius: $button-radius;
   color:white;
-  width:$form_content_width;
+  width:100%;
+  //max-width:$form_content_width;
     &:hover{
       background-color: $p_light;
       cursor: pointer;
@@ -138,12 +143,6 @@ li{
   overflow-x: hidden;
 }
 @media screen and (max-width:450px){
-  .form, .screen{
-    max-width:$form_width_small;
-  }
-  .form-btn, .input {
-    max-width:$form_content_width_small;
-  }
   li{
     overflow: scroll;
   }
