@@ -109,5 +109,31 @@ app.post('/login', async (req,res)=>{
       console.log(error);
     }
 })
+app.post('/changepass', async (req,res)=>{
+    try{
+        sess = req.session;
+        const [oldpassword,password] = [req.body.oldpassword,req.body.password];
+        const user = await userModel.findOne({nickname:sess.nickname});
+        if(user){
+            const match = await bcrypt.compare(oldpassword,user.password);
+            if(match){
+                user.password = await bcrypt.hash(password, 10);
+                user.save();
+                res.redirect('/');
+                }
+                else{
+                res.render('home',{message:"Password invalid!"});
+                }
+            }
+            else{
+                req.session.destroy();
+                res.render('login',{message:'Nickname not found!'})
+            }
+        }
+        catch(error){
+          console.log(error);
+        }
+    })
+
 
 app.listen(port,()=>console.log(`Server running on port ${port}`));
