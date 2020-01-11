@@ -88,17 +88,22 @@ app.post('/register',async (req,res)=>{
 });
 app.post('/login', async (req,res)=>{
     try{
-      sess = req.session;
-      const [nickname,password] = [req.body.nickname,req.body.password];
-      const user = await userModel.findOne({nickname:nickname});
-      const match = await bcrypt.compare(password,user.password);
-      if(match){
-        sess.nickname = nickname;
-        res.redirect('/');
-      }
-      else{
-        res.redirect('/login');
-      }
+        sess = req.session;
+        const [nickname,password] = [req.body.nickname,req.body.password];
+        const user = await userModel.findOne({nickname:nickname});
+        if(user){
+            const match = await bcrypt.compare(password,user.password);
+            if(match){
+            sess.nickname = nickname;
+            res.redirect('/');
+            }
+            else{
+            res.render('login',{message:"Password invalid!"});
+            }
+        }
+        else{
+            res.render('login',{message:'Nickname not found!'})
+        }
     }
     catch(error){
       console.log(error);

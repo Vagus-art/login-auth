@@ -87,6 +87,13 @@ body {
   position: relative;
   padding-bottom: 35px; }
 
+.warning {
+  width: inherit;
+  padding: 15px;
+  background-color: red;
+  color: white;
+  opacity: 0.5; }
+
 ul {
   list-style: none; }
 

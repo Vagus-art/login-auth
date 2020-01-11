@@ -109,6 +109,13 @@ body {
   position: relative;
   padding-bottom: $padding*2+$margin;
 }
+.warning{
+  width:inherit;
+  padding:$padding;
+  background-color: red;
+  color:white;
+  opacity:0.5;
+}
 ul{
   list-style: none;
 }
